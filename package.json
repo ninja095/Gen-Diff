@@ -1,0 +1,24 @@
+{
+  "name": "@hexlet/code",
+  "version": "1.0.0",
+  "description": "[![Actions Status](https://github.com/ninja095/frontend-project-lvl2/workflows/hexlet-check/badge.svg)](https://github.com/ninja095/frontend-project-lvl2/actions)",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ninja095/frontend-project-lvl2.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ninja095/frontend-project-lvl2/issues"
+  },
+  "homepage": "https://github.com/ninja095/frontend-project-lvl2#readme",
+  "dependencies": {
+    "commander": "^9.4.1"
+  },
+  "devDependencies": {}
+}
