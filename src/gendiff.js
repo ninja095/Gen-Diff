@@ -1,11 +1,12 @@
-const { concat, uniq } = require('lodash')
+
+import _ from 'lodash'
 
 const genDiff = (file1, file2) => {
     let result = '{\n'
     const data1 = Object.keys(file1)
     const data2 = Object.keys(file2)
-    let keys = concat(data1, data2)
-    keys = uniq(keys)
+    let keys = _.concat(data1, data2)
+    keys = _.uniq(keys)
     for (const key of keys) {
         if (!Object.hasOwn(file2, key)) {
             result += `- ${key}: ${file1[key]}\n`

@@ -1,6 +1,10 @@
 #!/usr/bin/env node
 import { Command } from 'commander';
-import genDiff from 'src/gendiff.js'
+import genDiff from '../src/gendiff.js';
+import fs from 'fs';
+import * as path from "path";
+
+
 
 // eslint-disable-next-line import/extensions
 
@@ -14,7 +18,19 @@ program
     .description('Compares two configuration files and shows a difference.')
     .version('0.8.0')
     .action((filepath1, filepath2) => {
-        console.log(genDiff(filepath1, filepath2));
+        const fullPath1 = path.resolve(process.cwd(), filepath1);
+        const fullPath2 = path.resolve(process.cwd(), filepath2);
+
+        try {
+            const data1 = fs.readFileSync(fullPath1, 'utf8');
+            const data2 = fs.readFileSync(fullPath2, 'utf8');
+            const content1 = JSON.parse(data1);
+            const content2 = JSON.parse(data2);
+
+            console.log(genDiff(content1, content2));
+        } catch (err) {
+            console.error(err);
+        }
     });
 
 program.parse();
