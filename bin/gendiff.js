@@ -1,10 +1,8 @@
 #!/usr/bin/env node
 import { Command } from 'commander';
-import genDiff from '../src/gendiff.js';
 import fs from 'fs';
-import * as path from "path";
-
-
+import * as path from 'path';
+import genDiff from '../src/gendiff.js';
 
 // eslint-disable-next-line import/extensions
 
@@ -18,9 +16,9 @@ program
     .description('Compares two configuration files and shows a difference.')
     .version('0.8.0')
     .action((filepath1, filepath2) => {
-        console.log("we build full path from", {
-            "processPath": process.cwd(),
-            "fixtureFolder": "__fixtures__",
+        console.log('we build full path from', {
+            'processPath': process.cwd(),
+            'fixtureFolder': '__fixtures__',
             fileName: filepath1
         })
         const badFullPath1 = process.cwd()+"/__fixtures__"+filepath1;
