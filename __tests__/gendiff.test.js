@@ -1,15 +1,17 @@
 import genDiff from "../src/gendiff.js";
 import { expect, test } from '@jest/globals';
-import path from 'path';
+import path, { dirname } from 'path';
+import { fileURLToPath } from 'url';
 import { readFileSync } from 'fs';
+
+// const __filename = fileURLToPath(import.meta.url);
+// const __dirname = dirname(__filename);
 
 test('we test genDiff function ', () => {
     // arrange
-    const file1 = path.resolve(process.cwd(), "__fixtures__", 'file1.json');
-    const file2 = path.resolve(process.cwd(), "__fixtures__", 'file2.json');
-
-    // act
-    const result = '{\n' +
+    const file1 = JSON.parse(path.resolve(process.cwd(), "__fixtures__", 'file1.json'));
+    const file2 = JSON.parse(path.resolve(process.cwd(), "__fixtures__", 'file2.json'));
+    const expectedResult = '{\n' +
         '- follow: false\n' +
         '  host: hexlet.io\n' +
         '- proxy: 123.234.53.22\n' +
@@ -17,6 +19,9 @@ test('we test genDiff function ', () => {
         '+ timeout: 20\n' +
         '+ verbose: true\n' +
         '}\n'
+
+    // act
+    const compareRes = genDiff(file1, file2);
     // assert
-    expect(genDiff(file1, file2)).toBe(result)
+    expect(compareRes).toBe(expectedResult)
 })
