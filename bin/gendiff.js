@@ -17,7 +17,7 @@ program
   .version('0.8.0')
   .action((filepath1, filepath2) => {
     const fullPath1 = path.resolve(process.cwd(), '__fixtures__', filepath1);
-    const fullPath2 = path.resolve(process.cwd(), '__fixtures__',filepath2);
+    const fullPath2 = path.resolve(process.cwd(), '__fixtures__', filepath2);
 
     try {
       const data1 = fs.readFileSync(fullPath1, 'utf8');
@@ -26,7 +26,7 @@ program
       const content2 = JSON.parse(data2);
 
       console.log(genDiff(content1, content2));
-      } catch (err) {
+    } catch (err) {
         console.error(err);
       }
   });
