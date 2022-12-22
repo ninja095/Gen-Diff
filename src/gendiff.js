@@ -1,4 +1,3 @@
-
 import _ from 'lodash'
 
 const genDiff = (file1, file2) => {

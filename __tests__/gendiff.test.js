@@ -3,7 +3,6 @@ import { expect, test } from '@jest/globals';
 import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import fs from 'fs';
-import {log} from "debug";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
