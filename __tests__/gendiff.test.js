@@ -2,26 +2,28 @@ import genDiff from "../src/gendiff.js";
 import { expect, test } from '@jest/globals';
 import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
-import { readFileSync } from 'fs';
+import fs from 'fs';
+import {log} from "debug";
 
 // const __filename = fileURLToPath(import.meta.url);
 // const __dirname = dirname(__filename);
+//
+// const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', filename);
+// const readFile = (filename) => fs.readFileSync(getFixturePath(filename), 'utf-8');
 
 test('we test genDiff function ', () => {
     // arrange
-    const file1 = JSON.parse(path.resolve(process.cwd(), "__fixtures__", 'file1.json'));
-    const file2 = JSON.parse(path.resolve(process.cwd(), "__fixtures__", 'file2.json'));
-    const expectedResult = '{\n' +
-        '- follow: false\n' +
-        '  host: hexlet.io\n' +
-        '- proxy: 123.234.53.22\n' +
-        '- timeout: 50\n' +
-        '+ timeout: 20\n' +
-        '+ verbose: true\n' +
-        '}\n'
+    const fullPath1 = path.resolve(process.cwd(), "__fixtures__", 'file1.json');
+    const fullPath2 = path.resolve(process.cwd(), "__fixtures__", 'file2.json');
+    const data1 = fs.readFileSync(fullPath1, 'utf8');
+    const data2 = fs.readFileSync(fullPath2, 'utf8');
+    const content1 = JSON.parse(data1);
+    const content2 = JSON.parse(data2);
+    const expectedResult = fs.readFileSync(path.resolve(process.cwd(), "__fixtures__", 'stringJson.txt'), 'utf8');
 
     // act
-    const compareRes = genDiff(file1, file2);
+    const compareRes = genDiff(content1, content2);
+
     // assert
     expect(compareRes).toBe(expectedResult)
 })
