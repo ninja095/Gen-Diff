@@ -13,10 +13,6 @@ const readFile = (filename) => fs.readFileSync(getFixturePath(filename), 'utf-8'
 
 test('we test genDiff function ', () => {
     // arrange
-    // const fullPath1 = path.resolve(process.cwd(), "__fixtures__", 'file1.json');
-    // const fullPath2 = path.resolve(process.cwd(), "__fixtures__", 'file2.json');
-    // const data1 = fs.readFileSync(fullPath1, 'utf8');
-    // const data2 = fs.readFileSync(fullPath2, 'utf8');
     const content1 = JSON.parse(readFile('file1.json'));
     const content2 = JSON.parse(readFile('file2.json'));
     const expectedResult = fs.readFileSync(path.resolve(process.cwd(), "__fixtures__", 'stringJson.txt'), 'utf8').trim();
