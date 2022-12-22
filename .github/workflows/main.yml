@@ -18,7 +18,7 @@ jobs:
     strategy:
       # Node versions list
       matrix:
-        node-version: [14.x]
+        node-version: [18.x]
 
     steps:
       # Check-out repository under GitHub workspace
