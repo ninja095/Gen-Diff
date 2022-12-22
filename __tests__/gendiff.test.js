@@ -12,13 +12,13 @@ const readFile = (filename) => fs.readFileSync(getFixturePath(filename), 'utf-8'
 
 test('we test genDiff function ', () => {
     // arrange
-    const content1 = JSON.parse(readFile('file1.json'));
-    const content2 = JSON.parse(readFile('file2.json'));
-    const expectedResult = fs.readFileSync(path.resolve(process.cwd(), "__fixtures__", 'stringJson.txt'), 'utf8').trim();
+  const content1 = JSON.parse(readFile('file1.json'));
+  const content2 = JSON.parse(readFile('file2.json'));
+  const expectedResult = fs.readFileSync(path.resolve(process.cwd(), "__fixtures__", 'stringJson.txt'), 'utf8').trim();
 
     // act
-    const compareRes = genDiff(content1, content2);
+  const compareRes = genDiff(content1, content2);
 
     // assert
-    expect(compareRes).toBe(expectedResult)
+  expect(compareRes).toBe(expectedResult)
 })
