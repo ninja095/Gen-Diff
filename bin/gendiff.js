@@ -2,7 +2,7 @@
 import { Command } from 'commander';
 import fs from 'fs';
 import * as path from 'path';
-import genDiff from '../src/gendiff.js';
+import genDiff from '../src/gendiff.js'; // eslint-disable-line
 
 // eslint-disable-next-line import/extensions
 
@@ -25,9 +25,9 @@ program
       const content1 = JSON.parse(data1);
       const content2 = JSON.parse(data2);
 
-      console.log(genDiff(content1, content2));
+      console.log(genDiff(content1, content2)); // eslint-disable-line
     } catch (err) {
-      console.error(err);
+      console.error(err); // eslint-disable-line
     }
   });
 
