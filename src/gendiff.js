@@ -10,15 +10,15 @@ const genDiff = (file1, file2) => {
         if (!Object.hasOwn(file2, key)) {
             result += `- ${key}: ${file1[key]}\n`
         } else if (
-            Object.hasOwn(file1, key) &&
-            Object.hasOwn(file2, key) &&
-            file1[key] === file2[key]
+          Object.hasOwn(file1, key) &&
+          Object.hasOwn(file2, key) &&
+          file1[key] === file2[key]
         ) {
             result += `  ${key}: ${file1[key]}\n`
         } else if (
-            Object.hasOwn(file1, key) &&
-            Object.hasOwn(file2, key) &&
-            file1[key] !== file2[key]
+          Object.hasOwn(file1, key) &&
+          Object.hasOwn(file2, key) &&
+          file1[key] !== file2[key]
         ) {
             result += `- ${key}: ${file1[key]}\n`
             result += `+ ${key}: ${file2[key]}\n`
@@ -30,4 +30,4 @@ const genDiff = (file1, file2) => {
     return result
 }
 
-export default genDiff;
+export default genDiff

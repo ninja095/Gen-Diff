@@ -27,8 +27,8 @@ program
 
       console.log(genDiff(content1, content2));
     } catch (err) {
-        console.error(err);
-      }
+      console.error(err);
+    }
   });
 
 program.parse();
