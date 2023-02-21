@@ -10,9 +10,19 @@ const __dirname = dirname(__filename); // eslint-disable-line
 const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', filename);
 const readFile = (filename) => fs.readFileSync(getFixturePath(filename), 'utf-8').trim();
 
-test('we test genDiff function ', () => {
+test('when we compare two files .json ', () => {
   const content1 = JSON.parse(readFile('file1.json'));
   const content2 = JSON.parse(readFile('file2.json'));
+  const expectedResult = fs.readFileSync(path.resolve(process.cwd(), '__fixtures__', 'stringJson.txt'), 'utf8').trim();
+
+  const compareRes = genDiff(content1, content2);
+
+  expect(compareRes).toBe(expectedResult);
+});
+
+test('when we compare two files .yml', () => {
+  const content1 = JSON.parse(readFile('file1.yml'));
+  const content2 = JSON.parse(readFile('file2.yml'));
   const expectedResult = fs.readFileSync(path.resolve(process.cwd(), '__fixtures__', 'stringJson.txt'), 'utf8').trim();
 
   const compareRes = genDiff(content1, content2);
