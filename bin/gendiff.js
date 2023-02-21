@@ -2,7 +2,7 @@
 import { Command } from 'commander';
 import fs from 'fs';
 import * as path from 'path';
-import parse from '../src/parsers.js';
+import parse from '../src/parsers.js'; // eslint-disable-line
 import genDiff from '../src/gendiff.js'; // eslint-disable-line
 
 // eslint-disable-next-line import/extensions

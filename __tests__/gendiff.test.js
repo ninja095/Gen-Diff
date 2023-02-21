@@ -2,7 +2,7 @@ import { expect, test } from '@jest/globals';
 import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import fs from 'fs';
-import parse from "../src/parsers.js";
+import parse from '../src/parsers.js'; // eslint-disable-line
 import genDiff from '../src/gendiff.js'; // eslint-disable-line
 
 const __filename = fileURLToPath(import.meta.url); // eslint-disable-line
@@ -10,7 +10,6 @@ const __dirname = dirname(__filename); // eslint-disable-line
 
 const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', filename);
 const readFile = (filename) => fs.readFileSync(getFixturePath(filename), 'utf-8').trim();
-
 
 test('when we compare two files .json ', () => {
   const content1 = parse(readFile('file1.json'), 'json');
