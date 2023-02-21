@@ -1,36 +1,19 @@
 import _ from 'lodash';
 
 const genDiff = (file1, file2) => {
-  let result = '{\n';
-  const data1 = Object.keys(file1);
-  const data2 = Object.keys(file2);
-  let keys = _.concat(data1, data2);
-  keys = _.sortBy(_.uniq(keys));
-  /* eslint-disable */
-  for (const key of keys) {
-    if (!Object.hasOwn(file2, key)) {
-      result += `- ${key}: ${file1[key]}\n`;
-    } else if (
-      Object.hasOwn(file1, key)
-      && Object.hasOwn(file2, key)
-      && file1[key] === file2[key]
-    ) {
-      result += `  ${key}: ${file1[key]}\n`;
-    } else if (
-      Object.hasOwn(file1, key)
-      && Object.hasOwn(file2, key)
-      && file1[key] !== file2[key]
-    ) {
-      result += `- ${key}: ${file1[key]}\n`;
-      result += `+ ${key}: ${file2[key]}\n`;
+  const keys = _.sortBy(_.union(Object.keys(file1), Object.keys(file2)));
+  const result = keys.map((key) => {
+    if (!_.has(file2, key)) {
+      return `- ${key}: ${file1[key]}`;
+    } else if (!_.has(file1, key)) {
+      return `+ ${key}: ${file2[key]}`;
+    } else if (_.isEqual(file1[key], file2[key])) {
+      return `  ${key}: ${file1[key]}`;
     } else {
-      result += `+ ${key}: ${file2[key]}\n`;
+      return `- ${key}: ${file1[key]}\n+ ${key}: ${file2[key]}`;
     }
-  }
-
-  /* eslint-enable */
-  result += '}';
-  return result;
+  }).join('\n');
+  return `{\n${result}\n}`;
 };
 
 export default genDiff;
