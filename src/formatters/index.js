@@ -1,6 +1,5 @@
 import stylish from './stylish.js'; // eslint-disable-line
 
-
 export default (data, format) => {
   switch (format) {
     case 'stylish':

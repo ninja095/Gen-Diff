@@ -24,4 +24,3 @@ const constructDiff = (data1, data2) => {
 };
 
 export default constructDiff;
-

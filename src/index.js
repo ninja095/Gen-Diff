@@ -4,7 +4,6 @@ import parse from './parsers.js';
 import constructDiff from './constructDiff.js';
 import getDiff from './formatters/index.js';
 
-
 const getData = (filepath) => readFileSync(path.resolve(`${process.cwd()}`, filepath));
 const getExtension = (filepath) => path.extname(filepath).slice(1);
 
