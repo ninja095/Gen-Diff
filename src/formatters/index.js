@@ -1,12 +1,17 @@
-import stylish from './stylish.js'; // eslint-disable-line
+import stylish from './stylish.js';
+import plain from './plain.js';
 
 export default (data, format) => {
-  switch (format) {
-    case 'stylish':
-      return stylish(data);
-    case 'json':
-      return JSON.stringify(data);
-    default:
-      throw new Error(`Unknown type of format: ${format}`);
+  if (format === 'stylish') {
+    return stylish(data);
+  } else if (format === 'plain') {
+    return plain(data);
+  } else if (format === 'json') {
+    return JSON.stringify(data);
   }
+  throw new Error(`Unknown type of format: ${format}`);
 };
+
+
+
+

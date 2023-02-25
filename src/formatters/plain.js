@@ -1,41 +1,39 @@
-import _ from 'lodash';
-
 const getFormattedValue = (value) => {
   if (typeof value === 'string') {
     return `'${value}'`;
   }
-  if (_.isObject(value)) {
+  if (typeof value === 'object' && value !== null) {
     return '[complex value]';
   }
   return value;
 };
 
-export default (tree) => {
-  const iter = (node, path) => {
-    const lines = node
-      .map((diff) => {
-        const keyPath = (path === '' ? `${diff.key}` : `${path}.${diff.key}`);
+const generateDiffLines = (tree, path = '') => {
+  const lines = [];
+  tree.forEach((node) => {
+    const keyPath = path === '' ? `${node.key}` : `${path}.${node.key}`;
 
-        switch (diff.type) {
-          case 'nested':
-            return iter(diff.children, keyPath);
-          case 'added':
-            return `Property '${keyPath}' was added with value: ${getFormattedValue(diff.value2)}`;
-          case 'deleted':
-            return `Property '${keyPath}' was removed`;
-          case 'changed':
-            return `Property '${keyPath}' was updated. From ${getFormattedValue(diff.value1)} to ${getFormattedValue(diff.value2)}`;
-          case 'unchanged':
-            return null;
-          default:
-            throw new Error(`Unknown type of diff: ${diff.type}`);
-        }
-      });
+    switch (node.type) {
+      case 'nested':
+        lines.push(generateDiffLines(node.children, keyPath));
+        break;
+      case 'added':
+        lines.push(`Property '${keyPath}' was added with value: ${getFormattedValue(node.value2)}`);
+        break;
+      case 'deleted':
+        lines.push(`Property '${keyPath}' was removed`);
+        break;
+      case 'changed':
+        lines.push(`Property '${keyPath}' was updated. From ${getFormattedValue(node.value1)} to ${getFormattedValue(node.value2)}`);
+        break;
+      case 'unchanged':
+        break;
+      default:
+        throw new Error(`Unknown type of diff: ${node.type}`);
+    }
+  });
 
-    return [...lines]
-      .filter(Boolean)
-      .join('\n');
-  };
-
-  return iter(tree, '');
+  return lines.filter((line) => line !== '').join('\n');
 };
+
+export default (tree) => generateDiffLines(tree);

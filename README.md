@@ -10,5 +10,11 @@
 ### Finding differences between two flat (key-value pairs only) YAML and JSON files.
 [![asciicast](https://asciinema.org/a/kv44H3YMV2y70psgN0xyPWr46.svg)](https://asciinema.org/a/kv44H3YMV2y70psgN0xyPWr46)
 
-### Finding differences between two files with **nested** structure YAML and JSON files.
+### Finding differences between two files with **nested** structure YAML and JSON files in the format **STYLISH**.
 [![asciicast](https://asciinema.org/a/xHik0spqd07laAhjPkL34kXuK.svg)](https://asciinema.org/a/xHik0spqd07laAhjPkL34kXuK)
+
+### Finding differences between two files with **nested** structure YAML and JSON files in the format **PLAIN**.
+[![asciicast](https://asciinema.org/a/grC6JLXfs8ZTdnmajXOANQhaA.svg)](https://asciinema.org/a/grC6JLXfs8ZTdnmajXOANQhaA)
+
+### Finding differences between two files with **nested** structure YAML and JSON files in the format **JSON**.
+[![asciicast](https://asciinema.org/a/aiHASwgLj5poZ85d4FvUdECDS.svg)](https://asciinema.org/a/aiHASwgLj5poZ85d4FvUdECDS)
