@@ -1,12 +1,10 @@
 import stylish from './stylish.js'; // eslint-disable-line
-import plain from './plain.js'; // eslint-disable-line
+
 
 export default (data, format) => {
   switch (format) {
     case 'stylish':
       return stylish(data);
-    case 'plain':
-      return plain(data);
     case 'json':
       return JSON.stringify(data);
     default:

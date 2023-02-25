@@ -1,9 +1,9 @@
 TN:
-SF:src/gendiff.js
-FN:3,genDiff
+SF:src/constructDiff.js
+FN:3,constructDiff
 FNF:1
 FNH:1
-FNDA:1,genDiff
+FNDA:1,constructDiff
 DA:1,1
 DA:2,1
 DA:3,1
