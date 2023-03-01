@@ -62,4 +62,3 @@ test('genDiff - json format with YAML files', () => {
   const expected = readFile('expected_json.txt');
   expect(actual).toBe(expected);
 });
-
