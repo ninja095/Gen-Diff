@@ -9,25 +9,20 @@ const stringify = (value) => {
 };
 
 const generateDiffLines = (tree, path = '') => {
-  const lines = [];
-  tree.forEach((node) => {
+  const lines = tree.map((node) => {
     const keyPath = path === '' ? `${node.key}` : `${path}.${node.key}`;
 
     switch (node.type) {
       case 'nested':
-        lines.push(generateDiffLines(node.children, keyPath));
-        break;
+        return generateDiffLines(node.children, keyPath);
       case 'added':
-        lines.push(`Property '${keyPath}' was added with value: ${stringify(node.value2)}`);
-        break;
+        return `Property '${keyPath}' was added with value: ${stringify(node.value2)}`;
       case 'deleted':
-        lines.push(`Property '${keyPath}' was removed`);
-        break;
+        return `Property '${keyPath}' was removed`;
       case 'changed':
-        lines.push(`Property '${keyPath}' was updated. From ${stringify(node.value1)} to ${stringify(node.value2)}`);
-        break;
+        return `Property '${keyPath}' was updated. From ${stringify(node.value1)} to ${stringify(node.value2)}`;
       case 'unchanged':
-        break;
+        return '';
       default:
         throw new Error(`Unknown type of diff: ${node.type}`);
     }
@@ -35,5 +30,6 @@ const generateDiffLines = (tree, path = '') => {
 
   return lines.filter((line) => line !== '').join('\n');
 };
+
 
 export default (tree) => generateDiffLines(tree);
