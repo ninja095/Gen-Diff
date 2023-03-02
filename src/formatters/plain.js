@@ -22,13 +22,15 @@ const generateDiffLines = (tree, path = '') => {
       case 'changed':
         return `Property '${keyPath}' was updated. From ${stringify(node.value1)} to ${stringify(node.value2)}`;
       case 'unchanged':
-        return '';
+        return null;
       default:
         throw new Error(`Unknown type of diff: ${node.type}`);
     }
   });
 
-  return lines.filter((line) => line !== '').join('\n');
+  return [...lines]
+    .filter(Boolean)
+    .join('\n');
 };
 
 
