@@ -3,12 +3,12 @@ import _ from 'lodash';
 const stepIndent = 4;
 const getIndent = (count) => ' '.repeat(count * stepIndent);
 
-const getValue = (node, depth) => {
+const stringify = (node, depth) => {
   if (!_.isObject(node)) {
     return node;
   }
   const bracketEndIndent = getIndent(depth - 1);
-  const lines = Object.entries(node).map(([key, value]) => `${getIndent(depth)}${key}: ${getValue(value, depth + 1)}`);
+  const lines = Object.entries(node).map(([key, value]) => `${getIndent(depth)}${key}: ${stringify(value, depth + 1)}`);
 
   return [
     '{',
@@ -26,15 +26,15 @@ const stylish = (data, depth = 1) => {
       case 'nested':
         return `${indent}  ${diff.key}: ${stylish(diff.children, depth + 1)}`;
       case 'added':
-        return `${indent}+ ${diff.key}: ${getValue(diff.value2, depth + 1)}`;
+        return `${indent}+ ${diff.key}: ${stringify(diff.value2, depth + 1)}`;
       case 'deleted':
-        return `${indent}- ${diff.key}: ${getValue(diff.value1, depth + 1)}`;
+        return `${indent}- ${diff.key}: ${stringify(diff.value1, depth + 1)}`;
       case 'unchanged':
-        return `${indent}  ${diff.key}: ${getValue(diff.value1, depth + 1)}`;
+        return `${indent}  ${diff.key}: ${stringify(diff.value1, depth + 1)}`;
       case 'changed':
         return [
-          `${indent}- ${diff.key}: ${getValue(diff.value1, depth + 1)}`,
-          `${indent}+ ${diff.key}: ${getValue(diff.value2, depth + 1)}`,
+          `${indent}- ${diff.key}: ${stringify(diff.value1, depth + 1)}`,
+          `${indent}+ ${diff.key}: ${stringify(diff.value2, depth + 1)}`,
         ];
       default:
         throw new Error(`Unknown type of data: ${diff.type}`);
