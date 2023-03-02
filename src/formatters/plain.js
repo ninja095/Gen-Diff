@@ -1,4 +1,4 @@
-const getFormattedValue = (value) => {
+const stringify = (value) => {
   if (typeof value === 'string') {
     return `'${value}'`;
   }
@@ -18,13 +18,13 @@ const generateDiffLines = (tree, path = '') => {
         lines.push(generateDiffLines(node.children, keyPath));
         break;
       case 'added':
-        lines.push(`Property '${keyPath}' was added with value: ${getFormattedValue(node.value2)}`);
+        lines.push(`Property '${keyPath}' was added with value: ${stringify(node.value2)}`);
         break;
       case 'deleted':
         lines.push(`Property '${keyPath}' was removed`);
         break;
       case 'changed':
-        lines.push(`Property '${keyPath}' was updated. From ${getFormattedValue(node.value1)} to ${getFormattedValue(node.value2)}`);
+        lines.push(`Property '${keyPath}' was updated. From ${stringify(node.value1)} to ${stringify(node.value2)}`);
         break;
       case 'unchanged':
         break;
