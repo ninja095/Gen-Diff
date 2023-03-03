@@ -12,7 +12,12 @@ const constructDiff = (data1, data2) => {
       case !Object.hasOwn(data2, key):
         return { key, value1: data1[key], type: 'deleted' };
       case data1[key] !== data2[key]:
-        return { key, value1: data1[key], value2: data2[key], type: 'changed' };
+        return {
+          key,
+          value1: data1[key],
+          value2: data2[key],
+          type: 'changed',
+        };
       default:
         return { key, value1: data1[key], type: 'unchanged' };
     }
@@ -20,6 +25,5 @@ const constructDiff = (data1, data2) => {
 
   return diff;
 };
-
 
 export default constructDiff;

@@ -33,5 +33,4 @@ const generateDiffLines = (tree, path = '') => {
     .join('\n');
 };
 
-
 export default (tree) => generateDiffLines(tree);

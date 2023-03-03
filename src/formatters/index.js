@@ -13,4 +13,3 @@ export default (data, format) => {
       throw new Error(`Unknown type of format: ${format}`);
   }
 };
-

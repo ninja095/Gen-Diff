@@ -20,6 +20,7 @@
   "dependencies": {
     "commander": "^9.4.1",
     "debug": "^4.3.4",
+    "expect": "^29.4.3",
     "js-yaml": "^4.1.0",
     "lodash": "^4.17.21",
     "readfilesync": "^1.1.5"
