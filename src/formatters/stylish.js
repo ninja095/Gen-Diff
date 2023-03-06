@@ -47,7 +47,7 @@ const stylish = (tree) => {
       ...lines,
       `${bracketEndIndent}}`,
     ].join('\n');
-  }
+  };
   return iter(tree);
 };
 
