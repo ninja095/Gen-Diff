@@ -9,8 +9,8 @@ const stringify = (value) => {
 };
 
 const plain = (tree) => {
-  const generateDiffLines = (tree, path = '') => {
-    const lines = tree.map((node) => {
+  const generateDiffLines = (data, path = '') => {
+    const lines = data.map((node) => {
       const keyPath = path === '' ? `${node.key}` : `${path}.${node.key}`;
 
       switch (node.type) {
@@ -33,7 +33,7 @@ const plain = (tree) => {
       .filter(Boolean)
       .join('\n');
   };
-  return generateDiffLines(tree)
-}
+  return generateDiffLines(tree);
+};
 
 export default plain;
