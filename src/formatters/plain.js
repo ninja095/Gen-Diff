@@ -29,9 +29,7 @@ const plain = (tree) => {
       }
     });
 
-    return [...lines]
-      .filter(Boolean)
-      .join('\n');
+    return lines.filter(Boolean).join('\n');
   };
   return generateDiffLines(tree);
 };
