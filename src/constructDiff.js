@@ -5,7 +5,7 @@ const constructDiff = (data1, data2) => {
 
   const diff = keys.map((key) => {
     switch (true) {
-      case _.isObject(data1[key]) && _.isObject(data2[key]):
+      case _.isPlainObject(data1[key]) && _.isPlainObject(data2[key]):
         return { key, children: constructDiff(data1[key], data2[key]), type: 'nested' };
       case !Object.hasOwn(data1, key):
         return { key, value2: data2[key], type: 'added' };
