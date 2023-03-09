@@ -6,7 +6,9 @@
 
 ## Installation Guide
 `git clone https://github.com/ninja095/frontend-project-lvl2`
+
 `npm ci`
+
 `sudo npm link`
 
 
