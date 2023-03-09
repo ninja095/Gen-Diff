@@ -20,8 +20,10 @@ const getValue = (node, depth) => { // функция для получения 
 
 const stylish = (tree) => { // функция преобразования дерева в строку в стиле "stylish"
   const iter = (data, depth = 1) => { // функция-итератор, обходящая дерево
-    const indent = getIndent(depth).slice(0, getIndent(depth) - 2); // задаем отступ для каждой строки, обрезая 2 пробела в конце, что соответствует смещению влево
-    const bracketEndIndent = getIndent(depth - 1); // определяем отступ до закрывающей скобки объекта
+    // задаем отступ для каждой строки, обрезая 2 пробела в конце, что соответствует смещению влево
+    const indent = getIndent(depth).slice(0, getIndent(depth) - 2);
+    // определяем отступ до закрывающей скобки объекта
+    const bracketEndIndent = getIndent(depth - 1);
 
     const lines = data.flatMap((diff) => { // обрабатываем каждый узел дерева
       switch (diff.type) { // проверяем тип узла
