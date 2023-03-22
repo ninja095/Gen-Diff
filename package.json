@@ -20,8 +20,7 @@
   "dependencies": {
     "commander": "^9.4.1",
     "js-yaml": "^4.1.0",
-    "lodash": "^4.17.21",
-    "readfilesync": "^1.1.5"
+    "lodash": "^4.17.21"
   },
   "bin": {
     "gendiff": "bin/gendiff.js"
