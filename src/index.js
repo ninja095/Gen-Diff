@@ -8,9 +8,7 @@ const getData = (filepath) => readFileSync(path.resolve(`${process.cwd()}`, file
 const getExtension = (filepath) => path.extname(filepath).slice(1);
 
 export default (filepath1, filepath2, format = 'stylish') => {
-  const fullPath1 = path.resolve(process.cwd(), '__fixtures__', filepath1);
-  const fullPath2 = path.resolve(process.cwd(), '__fixtures__', filepath2);
-  const data1 = parse(getData(fullPath1), getExtension(filepath1));
-  const data2 = parse(getData(fullPath2), getExtension(filepath2));
+  const data1 = parse(getData(filepath1), getExtension(filepath1));
+  const data2 = parse(getData(filepath2), getExtension(filepath2));
   return getDiff(constructDiff(data1, data2), format);
 };
