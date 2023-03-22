@@ -4,13 +4,15 @@
 [![Test Coverage](https://api.codeclimate.com/v1/badges/25b3b8afe71672da0d97/test_coverage)](https://codeclimate.com/github/ninja095/frontend-project-lvl2/test_coverage)
 [![CI](https://github.com/nodeca/js-yaml/workflows/CI/badge.svg?branch=master)](https://github.com/nodeca/js-yaml/actions)
 
-## Installation Guide
-`git clone https://github.com/ninja095/frontend-project-lvl2`
-
-`npm ci`
-
-`sudo npm link`
-
+### :wrench: Install
+1.  Склонировать репозиторию с командой: `git clone`.
+2.  Установите программу с командай: `npm install` и `npm link`.
+3.  Команды программы: `-f format, -h help`.
+4.  Стили форматирования: `plain, json, stylish`.
+#### Пример запуска программы:
+```
+gendiff file1.json file2.json
+```
 
 ### Finding differences between two flat (key-value pairs only) JSON files.
 [![asciicast](https://asciinema.org/a/aUliGAFgKWnom9aYoiwNgspcx.svg)](https://asciinema.org/a/aUliGAFgKWnom9aYoiwNgspcx)
