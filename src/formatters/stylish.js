@@ -1,46 +1,44 @@
 import _ from 'lodash';
 
-const stepIndent = 4; // задаем шаг для отступов в 4 пробела
+const stepIndent = 4;
 
-const getIndent = (count) => ' '.repeat(count * stepIndent); // функция для генерации отступов заданной длины
+const getIndent = (count) => ' '.repeat(count * stepIndent);
 
-const getValue = (node, depth) => { // функция для получения значения узла дерева
-  if (!_.isObject(node)) { // если значение не является объектом (то есть примитивом)
-    return node; // вернуть само значение
+const getValue = (node, depth) => {
+  if (!_.isObject(node)) {
+    return node;
   }
-  const bracketEndIndent = getIndent(depth - 1); // определяем отступ до закрывающей скобки объекта
-  const lines = Object.entries(node).map(([key, value]) => `${getIndent(depth)}${key}: ${getValue(value, depth + 1)}`); // обрабатываем каждую пару ключ-значение объекта
+  const bracketEndIndent = getIndent(depth - 1);
+  const lines = Object.entries(node).map(([key, value]) => `${getIndent(depth)}${key}: ${getValue(value, depth + 1)}`);
 
   return [
     '{',
-    ...lines, // добавляем обработанные строки в массив
-    `${bracketEndIndent}}`, // закрываем объект и добавляем отступ
-  ].join('\n'); // преобразуем массив в строку и разделяем строки переносами
+    ...lines,
+    `${bracketEndIndent}}`,
+  ].join('\n');
 };
 
-const formatStylish = (tree) => { // функция преобразования дерева в строку в стиле "Stylish"
-  const iter = (data, depth = 1) => { // функция-итератор, обходящая дерево
-    // задаем отступ для каждой строки, обрезая 2 пробела в конце, что соответствует смещению влево
+const formatStylish = (tree) => {
+  const iter = (data, depth = 1) => {
     const indent = getIndent(depth).slice(0, getIndent(depth) - 2);
-    // определяем отступ до закрывающей скобки объекта
     const bracketEndIndent = getIndent(depth - 1);
 
-    const lines = data.flatMap((diff) => { // обрабатываем каждый узел дерева
-      switch (diff.type) { // проверяем тип узла
-        case 'nested': // если узел является вложенным объектом
-          return `${indent}  ${diff.key}: ${iter(diff.children, depth + 1)}`; // рекурсивно вызываем функцию обработки вложенного объекта
-        case 'added': // если значение добавлено
-          return `${indent}+ ${diff.key}: ${getValue(diff.value2, depth + 1)}`; // добавляем отступ и получаем значение
-        case 'deleted': // если значение удалено
-          return `${indent}- ${diff.key}: ${getValue(diff.value1, depth + 1)}`; // добавляем отступ и получаем значение
-        case 'unchanged': // если значение не изменилось
-          return `${indent}  ${diff.key}: ${getValue(diff.value1, depth + 1)}`; // добавляем отступ и получаем значение
-        case 'changed': // если значение изменилось
+    const lines = data.flatMap((diff) => {
+      switch (diff.type) {
+        case 'nested':
+          return `${indent}  ${diff.key}: ${iter(diff.children, depth + 1)}`;
+        case 'added':
+          return `${indent}+ ${diff.key}: ${getValue(diff.value2, depth + 1)}`;
+        case 'deleted':
+          return `${indent}- ${diff.key}: ${getValue(diff.value1, depth + 1)}`;
+        case 'unchanged':
+          return `${indent}  ${diff.key}: ${getValue(diff.value1, depth + 1)}`;
+        case 'changed':
           return [
-            `${indent}- ${diff.key}: ${getValue(diff.value1, depth + 1)}`, // добавляем отступ и получаем старое значение
-            `${indent}+ ${diff.key}: ${getValue(diff.value2, depth + 1)}`, // добавляем отступ и получаем новое значение
+            `${indent}- ${diff.key}: ${getValue(diff.value1, depth + 1)}`,
+            `${indent}+ ${diff.key}: ${getValue(diff.value2, depth + 1)}`,
           ];
-        default: // выбрасываем ошибку если тип не известен
+        default:
           throw new Error(`Unknown type of data: ${diff.type}`);
       }
     });
