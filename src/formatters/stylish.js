@@ -1,28 +1,23 @@
 import _ from 'lodash';
 
-const stepIndent = 4;
-
-const getIndent = (count) => ' '.repeat(count * stepIndent);
+const getIndent = (count, stepIndent = 4) => ' '.repeat(count * stepIndent - 2);
 
 const getValue = (node, depth) => {
   if (!_.isObject(node)) {
     return node;
   }
-  const bracketEndIndent = getIndent(depth - 1);
   const lines = Object.entries(node).map(([key, value]) => `${getIndent(depth)}${key}: ${getValue(value, depth + 1)}`);
 
   return [
     '{',
     ...lines,
-    `${bracketEndIndent}}`,
+    `${getIndent(depth)}}`,
   ].join('\n');
 };
 
 const formatStylish = (tree) => {
   const iter = (data, depth = 1) => {
-    const indent = getIndent(depth).slice(0, getIndent(depth) - 2);
-    const bracketEndIndent = getIndent(depth - 1);
-
+    const indent = getIndent(depth);
     const lines = data.flatMap((diff) => {
       switch (diff.type) {
         case 'nested':
@@ -46,7 +41,7 @@ const formatStylish = (tree) => {
     return [
       '{',
       ...lines,
-      `${bracketEndIndent}}`,
+      `${getIndent(depth)}}`,
     ].join('\n');
   };
   return iter(tree);
