@@ -8,7 +8,7 @@ const stringify = (value) => {
   return value;
 };
 
-const plain = (tree) => {
+const formatPlain = (tree) => {
   const generateDiffLines = (data, path = '') => {
     const lines = data.map((node) => {
       const keyPath = path === '' ? `${node.key}` : `${path}.${node.key}`;
@@ -34,4 +34,4 @@ const plain = (tree) => {
   return generateDiffLines(tree);
 };
 
-export default plain;
+export default formatPlain;
