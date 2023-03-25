@@ -1,50 +1,45 @@
 import _ from 'lodash';
 
-const getIndent = (count, stepIndent = 4) => ' '.repeat(count * stepIndent - 2);
+const stepIndent = 4;
+const replacer = ' ';
+const doubleSpacer = '  ';
 
-const getValue = (node, depth) => {
+const getIndent = (count) => replacer.repeat(count * stepIndent - 2);
+
+const stringify = (node, depth) => {
   if (!_.isObject(node)) {
     return node;
   }
-  const lines = Object.entries(node).map(([key, value]) => `${getIndent(depth)}${key}: ${getValue(value, depth + 1)}`);
+  const lines = Object.entries(node).map(([key, value]) => `${getIndent(depth +1 )}${doubleSpacer}${key}: ${stringify(value, depth + 1)}`);
 
   return [
     '{',
     ...lines,
-    `${getIndent(depth)}}`,
+    `${getIndent(depth)}  }`,
   ].join('\n');
 };
 
-const formatStylish = (tree) => {
-  const iter = (data, depth = 1) => {
-    const indent = getIndent(depth);
+  const formatStylish = (data, depth = 1) => {
     const lines = data.flatMap((diff) => {
       switch (diff.type) {
         case 'nested':
-          return `${indent}  ${diff.key}: ${iter(diff.children, depth + 1)}`;
+          return `${getIndent(depth)}  ${diff.key}: {\n${formatStylish(diff.children, depth + 1).join('\n')}\n${getIndent(depth)}${doubleSpacer}}`;
         case 'added':
-          return `${indent}+ ${diff.key}: ${getValue(diff.value2, depth + 1)}`;
+          return `${getIndent(depth)}+ ${diff.key}: ${stringify(diff.value2, depth)}`;
         case 'deleted':
-          return `${indent}- ${diff.key}: ${getValue(diff.value1, depth + 1)}`;
+          return `${getIndent(depth)}- ${diff.key}: ${stringify(diff.value1, depth)}`;
         case 'unchanged':
-          return `${indent}  ${diff.key}: ${getValue(diff.value1, depth + 1)}`;
+          return `${getIndent(depth)}  ${diff.key}: ${stringify(diff.value1, depth)}`;
         case 'changed':
           return [
-            `${indent}- ${diff.key}: ${getValue(diff.value1, depth + 1)}`,
-            `${indent}+ ${diff.key}: ${getValue(diff.value2, depth + 1)}`,
+            `${getIndent(depth)}- ${diff.key}: ${stringify(diff.value1, depth)}`,
+            `${getIndent(depth)}+ ${diff.key}: ${stringify(diff.value2, depth)}`,
           ];
         default:
           throw new Error(`Unknown type of data: ${diff.type}`);
       }
     });
-
-    return [
-      '{',
-      ...lines,
-      `${getIndent(depth)}}`,
-    ].join('\n');
+    return lines
   };
-  return iter(tree);
-};
 
-export default formatStylish;
+export default (tree) => `{\n${formatStylish(tree).join('\n')}\n}`;
