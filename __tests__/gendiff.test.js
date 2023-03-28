@@ -15,6 +15,7 @@ test.each([
   ['file1.yml', 'file2.yml', 'plain', 'expected_plain.txt'],
   ['file1.json', 'file2.json', 'json', 'expected_json.txt'],
   ['file1.yml', 'file2.yml', 'json', 'expected_json.txt'],
+  ['file1.json', 'file2.json', undefined, 'expected_stylish.txt'],
 ])('genDiff-tests(%#)', (file1, file2, format, expectedFile) => {
   const actual = genDiff(getFixturePath(file1), getFixturePath(file2), format);
   const expected = readFile(expectedFile); expect(actual).toBe(expected);
