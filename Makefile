@@ -6,16 +6,13 @@ lint:
 	npx eslint .
 install:
 	npm ci
-	npm link
 fix:
 	npx eslint --fix .
 test:
-	npm test
+	NODE_OPTIONS=--experimental-vm-modules npx jest
 test-watch:
 	npm test -s -- --watch
 test-coverage:
 	npm test -- --coverage --coverageProvider=v8
-rec:
-	asciinema rec
 
 .PHONY: test
