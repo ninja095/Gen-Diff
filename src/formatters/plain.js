@@ -15,9 +15,9 @@ const formatPlain = (tree) => {
 
       switch (node.type) {
         case 'nested':
-          return generateDiffLines(node.children, keyPath);
+          return generateDiffLines(node.value, keyPath);
         case 'added':
-          return `Property '${keyPath}' was added with value: ${stringify(node.value2)}`;
+          return `Property '${keyPath}' was added with value: ${stringify(node.value)}`;
         case 'deleted':
           return `Property '${keyPath}' was removed`;
         case 'changed':
