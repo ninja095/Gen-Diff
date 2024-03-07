@@ -11,7 +11,7 @@
 4.  Стили форматирования: `plain, json, stylish`.
 #### Пример запуска программы:
 ```
-gendiff file1.json file2.json
+gendiff path1 path2  ( __fixtures__/file1.json __fixtures__/file2.json )
 ```
 
 ### Finding differences between two flat (key-value pairs only) JSON files.
